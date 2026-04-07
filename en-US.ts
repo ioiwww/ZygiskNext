@@ -53,5 +53,12 @@ export default {
     corrupted: {
         title: 'Module files corrupted',
         desc: 'Please revert the changes to Zygisk Next and try again.'
+    },
+    module: {
+        issue: {
+            title: 'This module has an issue',
+            companion_api_issue: 'This module {name} has an issue with improper use of the Companion API, which may cause process crashes and memory leaks. Please contact the developer of this module to resolve the issue.',
+            learn_more: 'Visit here for more information: {link}'
+        }
     }
 }

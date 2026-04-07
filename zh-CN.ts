@@ -53,5 +53,12 @@ export default {
     corrupted: {
         title: '模块文件损坏',
         desc: '请还原对 Zygisk Next 的修改后重试'
+    },
+    module: {
+        issue: {
+            title: '模块存在问题',
+            companion_api_issue: '此模块 {name} 存在 Companion API 使用不当的问题，可能导致进程崩溃和内存泄露，请联系此模块的开发者解决。',
+            learn_more: '访问这里了解更多信息：{link}',
+        }
     }
 }
