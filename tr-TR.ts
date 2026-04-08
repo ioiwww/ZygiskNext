@@ -58,6 +58,8 @@ export default {
             title: 'Bu modülün bir sorunu var',
             companion_api_issue: 'Bu modül {name}, Companion API\'nin yanlış kullanılması ile ilgili bir soruna sahiptir ve işlem çökmelerine ve bellek sızıntılarına neden olabilir. Lütfen bu modülün geliştiricisine başvurun.',
             learn_more: 'Daha fazla bilgi için buraya ziyaret edin：{link}',
+            check_banner: '{count} sorunlu modül tespit edildi. Lütfen modül listesini kontrol edin.',
+            badge: 'Sorunlu',
         }
     }
 }

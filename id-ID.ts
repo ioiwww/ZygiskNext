@@ -59,6 +59,8 @@ export default {
             title: 'Modul ini memiliki masalah',
             companion_api_issue: 'Modul {name} ini memiliki masalah dengan penggunaan Companion API yang tidak tepat, yang dapat menyebabkan kerusakan proses dan kebocoran memori. Harap hubungi pengembang modul ini untuk menyelesaikan masalah.',
             learn_more: 'Kunjungi di sini untuk informasi lebih lanjut：{link}',
+            check_banner: 'Terdeteksi {count} modul bermasalah. Silakan periksa daftar modul.',
+            badge: 'Bermasalah',
         }
     }
 }

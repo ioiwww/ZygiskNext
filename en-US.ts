@@ -58,7 +58,9 @@ export default {
         issue: {
             title: 'This module has an issue',
             companion_api_issue: 'This module {name} has an issue with improper use of the Companion API, which may cause process crashes and memory leaks. Please contact the developer of this module to resolve the issue.',
-            learn_more: 'Visit here for more information: {link}'
+            learn_more: 'Visit here for more information: {link}',
+            check_banner: '{count} modules have issues. Please review the module list.',
+            badge: 'Issue',
         }
     }
 }

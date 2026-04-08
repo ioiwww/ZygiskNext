@@ -53,5 +53,14 @@ export default {
     corrupted: {
         title: 'Tệp mô-đun bị hỏng',
         desc: 'Vui lòng hoàn tác các thay đổi lên Zygisk Next và thử lại.'
+    },
+    module: {
+        issue: {
+            title: 'Mô-đun này có vấn đề',
+            companion_api_issue: 'Mô-đun {name} này có vấn đề với việc sử dụng Companion API không đúng cách, có thể gây ra sự cố tiến trình và rò rỉ bộ nhớ. Vui lòng liên hệ nhà phát triển của mô-đun này để giải quyết vấn đề.',
+            learn_more: 'Truy cập tại đây để biết thêm thông tin: {link}',
+            check_banner: 'Đã phát hiện {count} mô-đun có vấn đề. Vui lòng kiểm tra danh sách mô-đun.',
+            badge: 'Có vấn đề',
+        }
     }
 }

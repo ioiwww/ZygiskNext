@@ -59,6 +59,8 @@ export default {
             title: 'Ce module a un problème',
             companion_api_issue: 'Ce module {name} a un problème d\'utilisation incorrecte de l\'API Companion, ce qui peut causer des plantages de processus et des fuites mémoire. Veuillez contacter le développeur de ce module pour résoudre le problème.',
             learn_more: 'Visitez ici pour plus d\'informations：{link}',
+            check_banner: '{count} modules présentent des problèmes. Veuillez vérifier la liste des modules.',
+            badge: 'Problème',
         }
     }
 }
