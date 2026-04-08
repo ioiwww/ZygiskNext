@@ -3,7 +3,7 @@ export default {
         name: 'English (US)'
     },
     main_fragment: {
-        dashboard: 'Dashboard',
+        dashboard: 'Status',
         basic: 'Basic Information',
         settings: 'Settings'
     },

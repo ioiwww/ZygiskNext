@@ -3,7 +3,7 @@ export default {
         name: '日本語'
     },
     main_fragment: {
-        dashboard: 'ダッシュボード',
+        dashboard: 'ステータス',
         basic: '基本情報',
         settings: '設定'
     },

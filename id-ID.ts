@@ -3,7 +3,7 @@ export default {
         name: 'Bahasa Indonesia (ID)'
     },
     main_fragment: {
-        dashboard: 'Dasbor',
+        dashboard: 'Status',
         basic: 'Informasi Dasar',
         settings: 'Pengaturan'
     },

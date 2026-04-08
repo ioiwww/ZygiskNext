@@ -5,7 +5,7 @@ export default {
         name: 'Français (FR)'
     },
     main_fragment: {
-        dashboard: 'Tableau de bord',
+        dashboard: 'État',
         basic: 'Informations de base',
         settings: 'Paramètres'
     },

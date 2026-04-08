@@ -3,7 +3,7 @@ export default {
         name: 'Türkçe (TR)'
     },
     main_fragment: {
-        dashboard: 'Gösterge Paneli',
+        dashboard: 'Durum',
         basic: 'Temel Bilgiler',
         settings: 'Ayarlar'
     },

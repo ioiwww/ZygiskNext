@@ -3,7 +3,7 @@ export default {
         name: '中文（香港）' 
     },
     main_fragment: {
-        dashboard: '儀表板',
+        dashboard: '狀態',
         basic: '基本資訊',
         settings: '設定'
     },

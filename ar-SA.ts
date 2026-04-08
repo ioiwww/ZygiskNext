@@ -3,7 +3,7 @@ export default {
         name: 'العربية'
     },
     main_fragment: {
-        dashboard: 'لوحة التحكم',
+        dashboard: 'الحالة',
         basic: 'معلومات أساسية',
         settings: 'الإعدادات'
     },

@@ -3,7 +3,7 @@ export default {
         name: 'Russian (RU)'
     },
     main_fragment: {
-        dashboard: 'Панель инструментов',
+        dashboard: 'Статус',
         basic: 'Основная информация',
         settings: 'Настройки'
     },

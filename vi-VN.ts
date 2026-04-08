@@ -3,7 +3,7 @@ export default {
         name: 'Tiếng Việt (VN)'
     },
     main_fragment: {
-        dashboard: 'Bảng điều khiển',
+        dashboard: 'Trạng thái',
         basic: 'Thông tin Cơ bản',
         settings: 'Cài đặt'
     },
