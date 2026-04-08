@@ -30,7 +30,7 @@ export default {
         denylist_just_umount: 'فك الربط فقط',
         anonymous_memory: 'استخدام ذاكرة مجهولة',
         anonymous_memory_desc: 'تحميل الوحدات في ذاكرة مجهولة. هذا يقلل من وضوح السجلات لكنه يتجاوز بعض آليات الكشف القديمة.',
-        zn_linker: 'استخدام رابط Zygisk Next (تجريبي)',
+        zn_linker: 'استخدام رابط Zygisk Next',
         zn_linker_desc: 'استخدام الرابط المدمج بدل رابط النظام لتحميل الوحدات. هذا يزيد التخفي لكنه قد يسبب مشاكل توافق.',
     },
     zygote_inject_state: {

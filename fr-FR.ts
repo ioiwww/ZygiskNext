@@ -30,7 +30,7 @@ export default {
         denylist_just_umount: 'Seulement « unmount »',
         anonymous_memory: 'Utiliser une mémoire anonyme',
         anonymous_memory_desc: 'Charge les modules dans une mémoire anonyme. Cela compromet la lecture des traces mais contourne certains anciens mécanismes de détection.',
-        zn_linker: 'Utiliser le linker Zygisk Next (expérimental)',
+        zn_linker: 'Utiliser le linker Zygisk Next',
         zn_linker_desc: 'Utiliser le linker interne plutôt que celui du système pour charger des modules. Cela améliore la furtivité mais peut causer des problèmes d\'incompatibilité.',
     },
     zygote_inject_state: {

@@ -29,7 +29,7 @@ export default {
         denylist_just_umount: 'Yalnızca Unmount',
         anonymous_memory: 'Anonim bellek kullan',
         anonymous_memory_desc: 'Modülleri anonim belleğe yükleyin. Bu, log okunabilirliğini tehlikeye atar, ancak bazı eski algılama mekanizmalarını atlatır.',
-        zn_linker: 'Zygisk Next bağlayıcıyı kullanın (Deneysel)',
+        zn_linker: 'Zygisk Next bağlayıcıyı kullanın',
         zn_linker_desc: 'Modülleri yüklemek için sistem bağlayıcı yerine yerleşik bağlayıcıyı kullanın. Bu, gizliliği artıracak ancak uyumluluk sorunlarına neden olabilir.',
     },
     zygote_inject_state: {
