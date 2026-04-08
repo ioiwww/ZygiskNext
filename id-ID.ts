@@ -23,6 +23,7 @@ export default {
         nonroot_as_denylist: 'Perlakukan aplikasi tanpa akses root sebagai denylist',
         enforce_denylist: 'Penerapan denylist',
         enforce_denylist_desc: 'Terapkan: segala perubahan yang diterapkan pada aplikasi dalam denylist akan dipulihkan<br/>Hanya umount: hanya perubahan terkait mount pada aplikasi dalam denylist yang akan dipulihkan.',
+        enforce_denylist_alert: 'Untuk pengguna normal, sangat disarankan untuk menonaktifkan fitur umount kernel secara manual di manajer KernelSU untuk menghindari titik mount dilepas beberapa kali karena kesalahkonfigurasi.',
         denylist_disabled: 'Nonaktif',
         denylist_enforced: 'Terapkan',
         denylist_just_umount: 'Hanya unmount',
@@ -52,5 +53,12 @@ export default {
     corrupted: {
         title: 'File modul rusak',
         desc: 'Harap urungkan perubahan pada file Zygisk Next dan coba lagi.'
+    },
+    module: {
+        issue: {
+            title: 'Modul ini memiliki masalah',
+            companion_api_issue: 'Modul {name} ini memiliki masalah dengan penggunaan Companion API yang tidak tepat, yang dapat menyebabkan kerusakan proses dan kebocoran memori. Harap hubungi pengembang modul ini untuk menyelesaikan masalah.',
+            learn_more: 'Kunjungi di sini untuk informasi lebih lanjut：{link}',
+        }
     }
 }

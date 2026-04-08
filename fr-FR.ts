@@ -24,8 +24,7 @@ export default {
         log_to_kernel: 'Traces via dmesg (seulement pour les développeurs)',
         nonroot_as_denylist: 'Traiter les apps non-root comme dans liste d\'exclusions',
         enforce_denylist: 'Stratégie liste d\'exclusions',
-        enforce_denylist_desc: 'Forcée: toute modification d\'une app dans la liste d\'exclusions sera rétablie.<br/>Seulement « unmount »: seules les modifications pour « mount » des apps dans la liste d\'exclusions seront rétablies.',
-        denylist_disabled: 'Inhibée',
+        enforce_denylist_desc: 'Forcée: toute modification d\'une app dans la liste d\'exclusions sera rétablie.<br/>Seulement « unmount »: seules les modifications pour « mount » des apps dans la liste d\'exclusions seront rétablies.',        enforce_denylist_alert: 'Pour les utilisateurs normaux, il est fortement recommandé de désactiver manuellement la fonctionnalité d\'umount du noyau dans le gestionnaire KernelSU pour éviter que les points de montage ne soient démontés plusieurs fois en raison d\'une mauvaise configuration.',        denylist_disabled: 'Inhibée',
         denylist_enforced: 'Forcée',
         denylist_just_umount: 'Seulement « unmount »',
         anonymous_memory: 'Utiliser une mémoire anonyme',
@@ -54,5 +53,12 @@ export default {
     corrupted: {
         title: 'Fichiers de module corrompus',
         desc: 'Veuillez annuler les changements de Zygisk Next et réessayez.'
+    },
+    module: {
+        issue: {
+            title: 'Ce module a un problème',
+            companion_api_issue: 'Ce module {name} a un problème d\'utilisation incorrecte de l\'API Companion, ce qui peut causer des plantages de processus et des fuites mémoire. Veuillez contacter le développeur de ce module pour résoudre le problème.',
+            learn_more: 'Visitez ici pour plus d\'informations：{link}',
+        }
     }
 }

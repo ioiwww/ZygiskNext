@@ -53,5 +53,12 @@ export default {
     corrupted: {
         title: '模組檔案損毀',
         desc: '請還原對 Zygisk Next 嘅修改後再試'
+    },
+    module: {
+        issue: {
+            title: '模組存在問題',
+            companion_api_issue: '此模組 {name} 存在 Companion API 使用不當嘅問題，可能導致行程崩潰同記憶體洩漏，請聯絡此模組嘅開發者解決。',
+            learn_more: '訪問呢度了解更多信息：{link}',
+        }
     }
 }

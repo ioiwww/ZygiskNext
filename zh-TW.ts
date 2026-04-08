@@ -23,6 +23,7 @@ export default {
         nonroot_as_denylist: '將非 root 應用視為排除列表',
         enforce_denylist: '排除列表策略',
         enforce_denylist_desc: '強制：還原對位於排除列表中的 App 做出的所有變更。<br/>僅還原掛載：僅還原對位於排除列表中的 App 做出的掛載變更。',
+        enforce_denylist_alert: '對於一般使用者，強烈建議在 KernelSU 管理器中手動關閉核心 umount 功能，以免因設定不當導致掛載點被多次卸載。',
         denylist_disabled: '關閉',
         denylist_enforced: '強制',
         denylist_just_umount: '僅還原掛載',
@@ -52,5 +53,12 @@ export default {
     corrupted: {
         title: '模組檔案損壞',
         desc: '請還原對 Zygisk Next 的修改後重試'
+    },
+    module: {
+        issue: {
+            title: '模組存在問題',
+            companion_api_issue: '此模組 {name} 存在 Companion API 使用不當的問題，可能導致進程崩潰和記憶體洩漏，請聯繫此模組的開發者解決。',
+            learn_more: '訪問這裡了解更多信息：{link}',
+        }
     }
 }

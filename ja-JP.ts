@@ -23,6 +23,7 @@ export default {
         nonroot_as_denylist: '非 Root アプリをブラックリストとして扱う',
         enforce_denylist: 'DenyList ポリシー',
         enforce_denylist_desc: '強制: DenyList 内のアプリに対する変更をすべて元に戻します。<br/>アンマウントのみ: DenyList 内のアプリのマウント変更のみを元に戻します。',
+        enforce_denylist_alert: '通常のユーザーの場合、KernelSU マネージャーでカーネル umount 機能を手動で無効にすることを強くお勧めします。これにより、設定の誤りによるマウントポイントの複数回のマウント解除を回避できます。',
         denylist_disabled: '無効',
         denylist_enforced: '強制',
         denylist_just_umount: 'アンマウントのみ',
@@ -52,5 +53,12 @@ export default {
     corrupted: {
         title: 'モジュールファイルが破損しています',
         desc: 'Zygisk Next の変更を元に戻してから再度お試しください。'
+    },
+    module: {
+        issue: {
+            title: 'モジュールに問題があります',
+            companion_api_issue: 'このモジュール {name} には Companion API の不適切な使用に関する問題があり、プロセスのクラッシュとメモリ リークが発生する可能性があります。このモジュールの開発者に連絡して解決してください。',
+            learn_more: 'ここにアクセスして詳細を確認してください：{link}',
+        }
     }
 }

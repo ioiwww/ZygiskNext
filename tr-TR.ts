@@ -52,5 +52,12 @@ export default {
     corrupted: {
         title: 'Modül dosyaları bozulmuş',
         desc: 'Lütfen Zygisk Next`teki değişiklikleri geri alın ve tekrar deneyin.'
+    },
+    module: {
+        issue: {
+            title: 'Bu modülün bir sorunu var',
+            companion_api_issue: 'Bu modül {name}, Companion API\'nin yanlış kullanılması ile ilgili bir soruna sahiptir ve işlem çökmelerine ve bellek sızıntılarına neden olabilir. Lütfen bu modülün geliştiricisine başvurun.',
+            learn_more: 'Daha fazla bilgi için buraya ziyaret edin：{link}',
+        }
     }
 }
