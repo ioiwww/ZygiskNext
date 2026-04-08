@@ -10,7 +10,7 @@ export default {
     dashboard: {
         root_impl: 'Root uygulaması',
         zygote_monitor: 'Zygote Monitörü',
-        zygisk_module_title: 'Zygisk Modülleri ({0})',
+        zygisk_module_title: 'Zygisk modülü yok | Zygisk modülü ({0}) | Zygisk modülleri ({0})',
         root_impl_normal: 'Mevcut Root Uygulaması {impl}, engelleme listesi düzgün çalışacaktır.',
         root_impl_abnormal: 'Root Uygulaması belirlenemedi, engelleme listesi çalışmayacak.',
         root_impl_multiple: 'Birden fazla Root uygulaması bulundu, engelleme listesi çalışmayacaktır.',
@@ -58,7 +58,7 @@ export default {
             title: 'Bu modülün bir sorunu var',
             companion_api_issue: 'Bu modül {name}, Companion API\'nin yanlış kullanılması ile ilgili bir soruna sahiptir ve işlem çökmelerine ve bellek sızıntılarına neden olabilir. Lütfen bu modülün geliştiricisine başvurun.',
             learn_more: 'Daha fazla bilgi için buraya ziyaret edin：{link}',
-            check_banner: '{count} sorunlu modül tespit edildi. Lütfen modül listesini kontrol edin.',
+            check_banner: 'Sorunlu modül tespit edilmedi. | {0} sorunlu modül tespit edildi. Lütfen modül listesini kontrol edin. | {0} sorunlu modül tespit edildi. Lütfen modül listesini kontrol edin.',
             badge: 'Sorunlu',
         }
     }

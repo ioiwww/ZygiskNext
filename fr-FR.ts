@@ -12,7 +12,7 @@ export default {
     dashboard: {
         root_impl: 'Implementation root',
         zygote_monitor: 'Moniteur Zygote',
-        zygisk_module_title: 'Modules Zygisk ({0})',
+        zygisk_module_title: 'Aucun module Zygisk | Module Zygisk ({0}) | Modules Zygisk ({0})',
         root_impl_normal: 'L\'implémentation root actuelle est {impl}, la liste d\'exclusions fonctionnera correctement.',
         root_impl_abnormal: 'Impossible de déterminer l\'implémentation root, la liste d\'exclusions ne fonctionnera pas.',
         root_impl_multiple: 'Multiples implantations root trouvées, la liste d\'exclusions ne fonctionnera pas.',
@@ -59,7 +59,7 @@ export default {
             title: 'Ce module a un problème',
             companion_api_issue: 'Ce module {name} a un problème d\'utilisation incorrecte de l\'API Companion, ce qui peut causer des plantages de processus et des fuites mémoire. Veuillez contacter le développeur de ce module pour résoudre le problème.',
             learn_more: 'Visitez ici pour plus d\'informations：{link}',
-            check_banner: '{count} modules présentent des problèmes. Veuillez vérifier la liste des modules.',
+            check_banner: 'Aucun module problématique détecté. | {0} module présente un problème. Veuillez vérifier la liste des modules. | {0} modules présentent des problèmes. Veuillez vérifier la liste des modules.',
             badge: 'Problème',
         }
     }

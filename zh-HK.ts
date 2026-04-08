@@ -59,7 +59,7 @@ export default {
             title: '模組存在問題',
             companion_api_issue: '此模組 {name} 存在 Companion API 使用不當嘅問題，可能導致行程崩潰同記憶體洩漏，請聯絡此模組嘅開發者解決。',
             learn_more: '訪問呢度了解更多信息：{link}',
-            check_banner: '檢測到 {count} 個有問題嘅模組，請檢查模組列表。',
+            check_banner: '檢測到 {0} 個有問題嘅模組，請檢查模組列表。',
             badge: '有問題',
         }
     }

@@ -10,7 +10,7 @@ export default {
     dashboard: {
         root_impl: 'Implementasi root',
         zygote_monitor: 'Monitor Zygote',
-        zygisk_module_title: 'Modul Zygisk ({0})',
+        zygisk_module_title: 'Tidak ada modul Zygisk | Modul Zygisk ({0}) | Modul Zygisk ({0})',
         root_impl_normal: 'Root saat ini {impl}, denylist akan berfungsi dengan normal.',
         root_impl_abnormal: 'Tidak dapat menentukan implementasi root, sehingga denylist tidak akan berfungsi.',
         root_impl_multiple: 'Ditemukan lebih dari satu implementasi root, denylist tidak akan berfungsi.',
@@ -59,7 +59,7 @@ export default {
             title: 'Modul ini memiliki masalah',
             companion_api_issue: 'Modul {name} ini memiliki masalah dengan penggunaan Companion API yang tidak tepat, yang dapat menyebabkan kerusakan proses dan kebocoran memori. Harap hubungi pengembang modul ini untuk menyelesaikan masalah.',
             learn_more: 'Kunjungi di sini untuk informasi lebih lanjut：{link}',
-            check_banner: 'Terdeteksi {count} modul bermasalah. Silakan periksa daftar modul.',
+            check_banner: 'Tidak ada modul bermasalah yang terdeteksi. | Terdeteksi {0} modul bermasalah. Silakan periksa daftar modul. | Terdeteksi {0} modul bermasalah. Silakan periksa daftar modul.',
             badge: 'Bermasalah',
         }
     }

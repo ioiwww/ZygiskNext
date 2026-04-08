@@ -10,7 +10,7 @@ export default {
     dashboard: {
         root_impl: 'Root implementation',
         zygote_monitor: 'Zygote Monitor',
-        zygisk_module_title: 'Zygisk Modules ({0})',
+        zygisk_module_title: 'No Zygisk modules | Zygisk module ({0}) | Zygisk modules ({0})',
         root_impl_normal: 'Current Root Implementation is {impl}, denylist will work properly.',
         root_impl_abnormal: 'Could not determine Root Implementation, denylist will not work.',
         root_impl_multiple: 'Multiple Root Implementations found, denylist will not work.',
@@ -59,7 +59,7 @@ export default {
             title: 'This module has an issue',
             companion_api_issue: 'This module {name} has an issue with improper use of the Companion API, which may cause process crashes and memory leaks. Please contact the developer of this module to resolve the issue.',
             learn_more: 'Visit here for more information: {link}',
-            check_banner: '{count} modules have issues. Please review the module list.',
+            check_banner: 'No problematic modules detected. | {0} module has an issue. Please review the module list. | {0} modules have issues. Please review the module list.',
             badge: 'Issue',
         }
     }

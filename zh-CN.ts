@@ -59,7 +59,7 @@ export default {
             title: '模块存在问题',
             companion_api_issue: '此模块 {name} 存在 Companion API 使用不当的问题，可能导致进程崩溃和内存泄露，请联系此模块的开发者解决。',
             learn_more: '访问这里了解更多信息：{link}',
-            check_banner: '检测到 {count} 个存在问题的模块，请检查模块列表。',
+            check_banner: '检测到 {0} 个存在问题的模块，请检查模块列表。',
             badge: '存在问题',
         }
     }
