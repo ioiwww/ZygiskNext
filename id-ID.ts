@@ -11,6 +11,7 @@ export default {
         root_impl: 'Implementasi root',
         zygote_monitor: 'Monitor Zygote',
         zygisk_module_title: 'Tidak ada modul Zygisk | Modul Zygisk ({0}) | Modul Zygisk ({0})',
+        zn_module_title: 'Tidak ada modul ZN | Modul ZN ({0}) | Modul ZN ({0})',
         root_impl_normal: 'Root saat ini {impl}, denylist akan berfungsi dengan normal.',
         root_impl_abnormal: 'Tidak dapat menentukan implementasi root, sehingga denylist tidak akan berfungsi.',
         root_impl_multiple: 'Ditemukan lebih dari satu implementasi root, denylist tidak akan berfungsi.',
@@ -61,6 +62,9 @@ export default {
             learn_more: 'Kunjungi di sini untuk informasi lebih lanjut：{link}',
             check_banner: 'Tidak ada modul bermasalah yang terdeteksi. | Terdeteksi {0} modul bermasalah. Silakan periksa daftar modul. | Terdeteksi {0} modul bermasalah. Silakan periksa daftar modul.',
             badge: 'Bermasalah',
-        }
+        },
+        zn: {
+            process_count: 'Tidak ada proses | {0} proses | {0} proses',
+        },
     }
 }

@@ -11,6 +11,7 @@ export default {
         root_impl: 'Root 方案',
         zygote_monitor: 'Zygote 監測器',
         zygisk_module_title: 'Zygisk 模組 ({0})',
+        zn_module_title: 'ZN 模組 ({0})',
         root_impl_normal: '目前 Root 方案為 {impl}，排除清單運作正常。',
         root_impl_abnormal: '無法確定 Root 方案，排除清單無法運作。',
         root_impl_multiple: '偵測到多個 Root 方案，排除清單無法運作。',
@@ -61,6 +62,9 @@ export default {
             learn_more: '訪問呢度了解更多信息：{link}',
             check_banner: '檢測到 {0} 個有問題嘅模組，請檢查模組列表。',
             badge: '有問題',
-        }
+        },
+        zn: {
+            process_count: '{0} 個進程',
+        },
     }
 }

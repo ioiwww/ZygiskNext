@@ -11,6 +11,7 @@ export default {
         root_impl: 'Root implementation',
         zygote_monitor: 'Zygote Monitor',
         zygisk_module_title: 'No Zygisk modules | Zygisk module ({0}) | Zygisk modules ({0})',
+        zn_module_title: 'No ZN modules | ZN module ({0}) | ZN modules ({0})',
         root_impl_normal: 'Current Root Implementation is {impl}, denylist will work properly.',
         root_impl_abnormal: 'Could not determine Root Implementation, denylist will not work.',
         root_impl_multiple: 'Multiple Root Implementations found, denylist will not work.',
@@ -61,6 +62,9 @@ export default {
             learn_more: 'Visit here for more information: {link}',
             check_banner: 'No problematic modules detected. | {0} module has an issue. Please review the module list. | {0} modules have issues. Please review the module list.',
             badge: 'Issue',
-        }
+        },
+        zn: {
+            process_count: 'No process | {0} process | {0} processes',
+        },
     }
 }

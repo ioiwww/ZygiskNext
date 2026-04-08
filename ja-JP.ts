@@ -11,6 +11,7 @@ export default {
         root_impl: 'Root の実装',
         zygote_monitor: 'Zygote の監視',
         zygisk_module_title: 'Zygisk モジュール ({0})',
+        zn_module_title: 'ZN モジュール ({0})',
         root_impl_normal: 'Root の実装は {impl} です。ブラックリストは適切に機能します。',
         root_impl_abnormal: 'Root の実装を判別できませんでした。ブラックリストは機能しません。',
         root_impl_multiple: '複数の Root の実装を検出したため、ブラックリストは機能しません。',
@@ -61,6 +62,9 @@ export default {
             learn_more: 'ここにアクセスして詳細を確認してください：{link}',
             check_banner: '問題のあるモジュールが {0} 件見つかりました。モジュール一覧を確認してください。',
             badge: '問題あり',
-        }
+        },
+        zn: {
+            process_count: '{0} プロセス',
+        },
     }
 }

@@ -11,6 +11,7 @@ export default {
         root_impl: 'Triển khai Root',
         zygote_monitor: 'Trình giám sát Zygote',
         zygisk_module_title: 'Không có mô-đun Zygisk | Mô-đun Zygisk ({0}) | Mô-đun Zygisk ({0})',
+        zn_module_title: 'Không có mô-đun ZN | Mô-đun ZN ({0}) | Mô-đun ZN ({0})',
         root_impl_normal: 'Triẻn khai Root hiện tại là {impl}, Denylist sẽ hoạt động bình thường..',
         root_impl_abnormal: 'Không thể xác định Triển khai Root, Denylist sẽ không hoạt động.',
         root_impl_multiple: 'Nhiều Triển khai Root được tìm thấy, Denylist sẽ không hoạt động.',
@@ -61,6 +62,9 @@ export default {
             learn_more: 'Truy cập tại đây để biết thêm thông tin: {link}',
             check_banner: 'Không phát hiện mô-đun có vấn đề. | Đã phát hiện {0} mô-đun có vấn đề. Vui lòng kiểm tra danh sách mô-đun. | Đã phát hiện {0} mô-đun có vấn đề. Vui lòng kiểm tra danh sách mô-đun.',
             badge: 'Có vấn đề',
-        }
+        },
+        zn: {
+            process_count: 'Không có tiến trình | {0} tiến trình | {0} tiến trình',
+        },
     }
 }

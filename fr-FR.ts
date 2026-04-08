@@ -13,6 +13,7 @@ export default {
         root_impl: 'Implementation root',
         zygote_monitor: 'Moniteur Zygote',
         zygisk_module_title: 'Aucun module Zygisk | Module Zygisk ({0}) | Modules Zygisk ({0})',
+        zn_module_title: 'Aucun module ZN | Module ZN ({0}) | Modules ZN ({0})',
         root_impl_normal: 'L\'implémentation root actuelle est {impl}, la liste d\'exclusions fonctionnera correctement.',
         root_impl_abnormal: 'Impossible de déterminer l\'implémentation root, la liste d\'exclusions ne fonctionnera pas.',
         root_impl_multiple: 'Multiples implantations root trouvées, la liste d\'exclusions ne fonctionnera pas.',
@@ -61,6 +62,9 @@ export default {
             learn_more: 'Visitez ici pour plus d\'informations：{link}',
             check_banner: 'Aucun module problématique détecté. | {0} module présente un problème. Veuillez vérifier la liste des modules. | {0} modules présentent des problèmes. Veuillez vérifier la liste des modules.',
             badge: 'Problème',
-        }
+        },
+        zn: {
+            process_count: 'Aucun processus | {0} processus | {0} processus',
+        },
     }
 }
