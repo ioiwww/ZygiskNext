@@ -10,7 +10,7 @@ export default {
     dashboard: {
         root_impl: 'Root 實現',
         zygote_monitor: 'Zygote 監視器',
-        modules: '模組 ({0})',
+        zygisk_module_title: 'Zygisk 模組 ({0})',
         root_impl_normal: '目前 Root 實現為 {impl}，排除列表將正常工作。',
         root_impl_abnormal: '無法確定 Root 實現，排除列表將不會工作。',
         root_impl_multiple: '目前存在多個 Root 實現，排除列表將不會工作。',

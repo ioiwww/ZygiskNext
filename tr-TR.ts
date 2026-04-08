@@ -10,7 +10,7 @@ export default {
     dashboard: {
         root_impl: 'Root uygulaması',
         zygote_monitor: 'Zygote Monitörü',
-        modules: 'Modül yok | (1) Modül | ({0}) Modüll',
+        zygisk_module_title: 'Zygisk Modülleri ({0})',
         root_impl_normal: 'Mevcut Root Uygulaması {impl}, engelleme listesi düzgün çalışacaktır.',
         root_impl_abnormal: 'Root Uygulaması belirlenemedi, engelleme listesi çalışmayacak.',
         root_impl_multiple: 'Birden fazla Root uygulaması bulundu, engelleme listesi çalışmayacaktır.',

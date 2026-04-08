@@ -10,7 +10,7 @@ export default {
     dashboard: {
         root_impl: 'Root 方案',
         zygote_monitor: 'Zygote 監測器',
-        modules: '模組 ({0})',
+        zygisk_module_title: 'Zygisk 模組 ({0})',
         root_impl_normal: '目前 Root 方案為 {impl}，排除清單運作正常。',
         root_impl_abnormal: '無法確定 Root 方案，排除清單無法運作。',
         root_impl_multiple: '偵測到多個 Root 方案，排除清單無法運作。',

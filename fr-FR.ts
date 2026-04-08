@@ -12,7 +12,7 @@ export default {
     dashboard: {
         root_impl: 'Implementation root',
         zygote_monitor: 'Moniteur Zygote',
-        modules: 'Aucun module | Module (1) | Modules ({0})',
+        zygisk_module_title: 'Modules Zygisk ({0})',
         root_impl_normal: 'L\'implémentation root actuelle est {impl}, la liste d\'exclusions fonctionnera correctement.',
         root_impl_abnormal: 'Impossible de déterminer l\'implémentation root, la liste d\'exclusions ne fonctionnera pas.',
         root_impl_multiple: 'Multiples implantations root trouvées, la liste d\'exclusions ne fonctionnera pas.',

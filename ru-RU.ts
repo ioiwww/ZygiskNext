@@ -10,7 +10,7 @@ export default {
     dashboard: {
         root_impl: 'Источник рут',
         zygote_monitor: 'Мониторинг Zygote',
-        modules: 'Нет модулей | Модуль (1) | Модули ({0})',
+        zygisk_module_title: 'Модули Zygisk ({0})',
         root_impl_normal: 'Текущий источник рут - {impl}, denylist будет работать правильно.',
         root_impl_abnormal: 'Не удалось определить источник рут, denylist не будет работать.',
         root_impl_multiple: 'Обнаружено несколько источников рут, denylist не будет работать.',

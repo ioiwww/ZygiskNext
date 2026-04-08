@@ -10,7 +10,7 @@ export default {
     dashboard: {
         root_impl: 'تنفيذ الروت',
         zygote_monitor: 'مراقب Zygote',
-        modules: 'لا توجد وحدات | وحدة واحدة | وحدات ({0})',
+        zygisk_module_title: 'وحدات Zygisk ({0})',
         root_impl_normal: 'تنفيذ الروت الحالي هو {impl}، قائمة الحظر تعمل بشكل صحيح.',
         root_impl_abnormal: 'تعذر تحديد تنفيذ الروت، قائمة الحظر لن تعمل.',
         root_impl_multiple: 'تم العثور على أكثر من تنفيذ روت، قائمة الحظر لن تعمل.',

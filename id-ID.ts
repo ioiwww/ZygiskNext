@@ -10,7 +10,7 @@ export default {
     dashboard: {
         root_impl: 'Implementasi root',
         zygote_monitor: 'Monitor Zygote',
-        modules: 'Tidak ada modul | Modul (1) | Modul ({0})',
+        zygisk_module_title: 'Modul Zygisk ({0})',
         root_impl_normal: 'Root saat ini {impl}, denylist akan berfungsi dengan normal.',
         root_impl_abnormal: 'Tidak dapat menentukan implementasi root, sehingga denylist tidak akan berfungsi.',
         root_impl_multiple: 'Ditemukan lebih dari satu implementasi root, denylist tidak akan berfungsi.',

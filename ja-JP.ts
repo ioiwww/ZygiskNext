@@ -10,7 +10,7 @@ export default {
     dashboard: {
         root_impl: 'Root の実装',
         zygote_monitor: 'Zygote の監視',
-        modules: 'モジュールなし | モジュール (1) | モジュール ({0})',
+        zygisk_module_title: 'Zygisk モジュール ({0})',
         root_impl_normal: 'Root の実装は {impl} です。ブラックリストは適切に機能します。',
         root_impl_abnormal: 'Root の実装を判別できませんでした。ブラックリストは機能しません。',
         root_impl_multiple: '複数の Root の実装を検出したため、ブラックリストは機能しません。',

@@ -10,7 +10,7 @@ export default {
     dashboard: {
         root_impl: 'Triển khai Root',
         zygote_monitor: 'Trình giám sát Zygote',
-        modules: 'Không có mô-đun nào | Mô-đun (1) | Mô-đun ({0})',
+        zygisk_module_title: 'Mô-đun Zygisk ({0})',
         root_impl_normal: 'Triẻn khai Root hiện tại là {impl}, Denylist sẽ hoạt động bình thường..',
         root_impl_abnormal: 'Không thể xác định Triển khai Root, Denylist sẽ không hoạt động.',
         root_impl_multiple: 'Nhiều Triển khai Root được tìm thấy, Denylist sẽ không hoạt động.',
