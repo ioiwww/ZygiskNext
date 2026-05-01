@@ -36,9 +36,11 @@ jobs:
             echo '${{ secrets.PUBLIC_KEY }}' | base64 --decode > module/public_key
             echo '${{ secrets.PRIVATE_KEY }}' | base64 --decode > module/private_key
           else
-            echo "dummy_pub" > module/public_key
-            echo "dummy_priv" > module/private_key
+            # إنشاء مفاتيح وهمية بحجم 32 بايت (حرف) بالضبط ليتجاوز عملية التحقق والتوقيع
+            echo -n "12345678901234567890123456789012" > module/public_key
+            echo -n "12345678901234567890123456789012" > module/private_key
           fi
+
 
       - name: Setup Java
         uses: actions/setup-java@v4
