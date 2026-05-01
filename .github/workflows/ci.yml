@@ -1,38 +1,36 @@
-name: CI
+Name: CI-Fast-Build
 
 on:
   workflow_dispatch:
     inputs:
       post_telegram:
         description: 'Post to Telegram'
-        required: true
+        required: false
+        default: false
         type: boolean
   push:
-    branches: [ master ]
-    tags: [ v* ]
+    branches: [ master, main ]
   pull_request:
-  merge_group:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
-      CCACHE_NOHASHDIR: "true"
-      CCACHE_HARDLINK: "true"
-      CCACHE_BASEDIR: "${{ github.workspace }}"
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           submodules: "recursive"
-          fetch-depth: 0
+          fetch-depth: 1 # سرعة أكبر في التحميل
 
-      - name: Write key
-        if: ${{ ( github.event_name != 'pull_request' && github.ref == 'refs/heads/master' ) || github.ref_type == 'tag' }}
+      - name: Generate Dummy Keys
         run: |
-          if [ ! -z "${{ secrets.PRIVATE_KEY }}" ]; then
+          mkdir -p module
+          # توليد مفاتيح وهمية إذا كانت الـ Secrets فارغة ليتمكن Gradle من الإكمال
+          if [ -z "${{ secrets.PRIVATE_KEY }}" ]; then
+            echo "Generating dummy keys for build..."
+            echo "dummy_public_key" > module/public_key
+            echo "dummy_private_key" > module/private_key
+          else
             echo '${{ secrets.PUBLIC_KEY }}' | base64 --decode > module/public_key
             echo '${{ secrets.PRIVATE_KEY }}' | base64 --decode > module/private_key
           fi
@@ -43,97 +41,25 @@ jobs:
           distribution: "temurin"
           java-version: "17"
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          gradle-home-cache-cleanup: true
-
-      - name: Setup rust-cache
-        uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: zygiskd/src -> ../build/intermediates/rust
-          cache-targets: false
-          
       - name: Setup Rust
         run: |
           rustup override set nightly
           rustup target add aarch64-linux-android
+          # نكتفي بمعمارية واحدة إذا أردت سرعة قصوى، لكن تركتها لضمان التوافق
           rustup target add x86_64-linux-android
-          rustup target add i686-linux-android
-          rustup target add armv7-linux-androideabi
 
-      - name: Set up ccache
-        uses: hendrikmuhs/ccache-action@v1.2
-        with:
-          max-size: 2G
-          key: ${{ runner.os }}
-          restore-keys: ${{ runner.os }}
-          save: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-
-      - name: Build with Gradle
+      - name: Build Release
         run: |
-          echo 'org.gradle.parallel=true' >> gradle.properties
-          echo 'org.gradle.vfs.watch=true' >> gradle.properties
-          echo 'org.gradle.jvmargs=-Xmx2048m' >> gradle.properties
-          echo 'android.native.buildOutput=verbose' >> gradle.properties
-          sed -i 's/org.gradle.unsafe.configuration-cache=true//g' gradle.properties
-          ./gradlew zipRelease
-          ./gradlew zipDebug
+          chmod +x gradlew
+          # إعدادات لتسريع Gradle
+          ./gradlew zipRelease \
+            -Dorg.gradle.parallel=true \
+            -Dorg.gradle.vfs.watch=true \
+            -Dorg.gradle.jvmargs="-Xmx2048m" \
+            --no-daemon
 
-      - name: Prepare artifact
-        if: success()
-        id: prepareArtifact
-        run: |
-          releaseName=`ls module/build/outputs/release/Zygisk-Next-v*-release.zip | awk -F '(/|.zip)' '{print $5}'` && echo "releaseName=$releaseName" >> $GITHUB_OUTPUT
-          debugName=`ls module/build/outputs/release/Zygisk-Next-v*-debug.zip | awk -F '(/|.zip)' '{print $5}'` && echo "debugName=$debugName" >> $GITHUB_OUTPUT
-          unzip module/build/outputs/release/Zygisk-Next-v*-release.zip -d zksu-release
-          unzip module/build/outputs/release/Zygisk-Next-v*-debug.zip -d zksu-debug
-          releaseSymbolName="SYMBOLS-$releaseName.zip"
-          debugSymbolName="SYMBOLS-$debugName.zip"
-          echo "releaseSymbolName=$releaseSymbolName" >> $GITHUB_OUTPUT
-          echo "debugSymbolName=$debugSymbolName" >> $GITHUB_OUTPUT
-          zip -r $releaseSymbolName zygiskd/build/symbols/release
-          zip -r $debugSymbolName zygiskd/build/symbols/debug
-
-      - name: Upload release
+      - name: Upload Fast Release
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.prepareArtifact.outputs.releaseName }}
-          path: "./zksu-release/*"
-
-      - name: Upload debug
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ steps.prepareArtifact.outputs.debugName }}
-          path: "./zksu-debug/*"
-
-      - name: Upload release symbols
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ steps.prepareArtifact.outputs.releaseName }}-symbols
-          path: "zygiskd/build/symbols/release"
-
-      - name: Upload debug symbols
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ steps.prepareArtifact.outputs.debugName }}-symbols
-          path: "zygiskd/build/symbols/debug"
-          
-      - name: Post to channel
-        if: ${{ success() && github.event_name != 'pull_request' && github.ref == 'refs/heads/master' && github.ref_type != 'tag' && inputs.post_telegram != 'false' }}
-        env:
-          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-          COMMIT_URL: ${{ github.event.head_commit.url }}
-          COMMIT_ID: ${{ github.event.head_commit.id }}
-        run: |
-          if [ ! -z "${{ secrets.BOT_TOKEN }}" ]; then
-            OUTPUT="module/build/outputs/release"
-            export Release=$(find $OUTPUT -name "Zygisk-Next-v*-release.zip")
-            export Debug=$(find $OUTPUT -name "Zygisk-Next-v*-debug.zip")
-            export ReleaseSymbol="${{ steps.prepareArtifact.outputs.releaseSymbolName }}"
-            export DebugSymbol="${{ steps.prepareArtifact.outputs.debugSymbolName }}"
-            URL=$(python3 .github/scripts/telegram_url.py)
-            curl -v "$URL" -F Release="@$Release" -F Debug="@$Debug" -F ReleaseSymbol="@$ReleaseSymbol" -F DebugSymbol="@$DebugSymbol" 
-          fi
+          name: Zygisk-Next-Fast-Build
+          path: module/build/outputs/release/*.zip
