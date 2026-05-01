@@ -1,4 +1,4 @@
-name: CI-Fixed
+name: CI-Fast-Release
 
 on:
   workflow_dispatch:
@@ -8,39 +8,52 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    # عدلته لـ ubuntu لأنه أسرع بـ 10 مرات في بناء Rust للأندرويد
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v4 # ترقية من v3 إلى v4
+        uses: actions/checkout@v4
         with:
           submodules: "recursive"
           fetch-depth: 1
 
-      - name: Dummy Keys
-        run: |
-          mkdir -p module
-          # إنشاء مفاتيح فارغة ليتجاوز Gradle مرحلة التحقق
-          [ -f module/public_key ] || echo "dummy" > module/public_key
-          [ -f module/private_key ] || echo "dummy" > module/private_key
-
       - name: Setup Java
-        uses: actions/setup-java@v4 # ترقية إلى v4
+        uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           java-version: "17"
 
-      - name: Setup Rust
+      - name: Setup Rust Toolchain
         run: |
+          # تثبيت Nightly مع تحديد الأهداف (Targets) مباشرة لضمان عدم فقدان الـ Core crates
+          rustup toolchain install nightly -t aarch64-linux-android -t armv7-linux-androideabi
           rustup override set nightly
-          rustup target add aarch64-linux-android
 
-      - name: Build
+      - name: Prepare Dummy Keys
+        run: |
+          mkdir -p module
+          # فحص إذا كانت المفاتيح موجودة كـ Secrets، وإلا استخدام مفاتيح وهمية
+          if [ ! -z "${{ secrets.PRIVATE_KEY }}" ]; then
+            echo '${{ secrets.PUBLIC_KEY }}' | base64 --decode > module/public_key
+            echo '${{ secrets.PRIVATE_KEY }}' | base64 --decode > module/private_key
+          else
+            echo "Using dummy keys for fast build"
+            echo "dummy_pub" > module/public_key
+            echo "dummy_priv" > module/private_key
+          fi
+
+      - name: Build Release
         run: |
           chmod +x gradlew
+          # إعدادات JVM لتسريع الـ Gradle وتجنب استهلاك الذاكرة
+          export GRADLE_OPTS="-Dorg.gradle.jvmargs=-Xmx3g -Dorg.gradle.parallel=true"
           ./gradlew zipRelease --no-daemon
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4 # الحل هنا: ترقية الإصدار
+        uses: actions/upload-artifact@v4
         with:
           name: Zygisk-Next-Release
+          # المسار المرن لجلب ملف الـ zip مهما كان اسمه
           path: module/build/outputs/release/*.zip
+          retention-days: 5
