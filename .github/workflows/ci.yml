@@ -1,4 +1,4 @@
-Name: CI-Fixed
+name: CI-Fixed
 
 on:
   workflow_dispatch:
