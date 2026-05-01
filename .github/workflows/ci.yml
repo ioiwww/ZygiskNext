@@ -1,4 +1,4 @@
-Name: CI-Fast-Build
+name: CI-Fast-Build & well if we can build why not
 
 on:
   workflow_dispatch:
