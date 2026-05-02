@@ -2,7 +2,6 @@ name: CI
 
 on:
   [workflow_dispatch,push]
-    
   
 
 jobs:
@@ -25,29 +24,20 @@ jobs:
         if: ${{ ( github.event_name != 'pull_request' && github.ref == 'refs/heads/master' ) || github.ref_type == 'tag' }}
         run: |
           mkdir -p module
+          rm -f module/public_key module/private_key
+          
           if [ ! -z "${{ secrets.PRIVATE_KEY }}" ]; then
             echo "Using keys from secrets..."
             echo '${{ secrets.PUBLIC_KEY }}' | base64 --decode > module/public_key
             echo '${{ secrets.PRIVATE_KEY }}' | base64 --decode > module/private_key
           else
-            echo "Secrets not found. Generating 32-byte Ed25519 keys for ZygiskNext..."
-            
-            # توليد المفتاح الخاص الخام (32 بت)
-            openssl genpkey -algorithm ed25519 -outform DER -out private.der
-            # استخراج الجزء الخام فقط (آخر 32 بايت من ملف الـ DER)
-            tail -c 32 private.der > module/private_key
-            
-            # توليد المفتاح العام الخام (32 بت)😭😭😭gayest app ever
-            openssl pkey -in private.der -inform DER -pubout -outform DER -out public.der
-            # استخراج الجزء الخام فقط (آخر 32 بايت من ملف الـ DER)
-            tail -c 32 public.der > module/public_key
-            
-            echo "Keys generated successfully with length: $(wc -c < module/private_key) bytes"
-            # تنظيف الملفات المؤقتة
-            rm private.der public.der
+            echo "Generating 32-byte keys using Linux urandom..."
+            # توليد 32 بايت عشوائية تماماً للمفاتيح بدون تعقيدات البايثون
+            head -c 32 /dev/urandom > module/private_key
+            head -c 32 /dev/urandom > module/public_key
+            echo "Keys generated successfully."
+            echo "Private key size: $(stat -c%s module/private_key) bytes"
           fi
-
-
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -56,10 +46,10 @@ jobs:
           java-version: "17"
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3 # الإصدار المستقر لـ Gradle
+        uses: gradle/actions/setup-gradle@v3
 
       - name: Setup rust-cache
-        uses: swatinem/rust-cache@v2 # تصحيح الإصدار من v4 إلى v2
+        uses: swatinem/rust-cache@v2
         with:
           workspaces: zygiskd/src -> ../build/intermediates/rust
           cache-targets: false
@@ -70,7 +60,7 @@ jobs:
           rustup target add aarch64-linux-android x86_64-linux-android i686-linux-android armv7-linux-androideabi
 
       - name: Set up ccache
-        uses: hendrikmuhs/ccache-action@v1.2 # تصحيح الإصدار من v4 إلى v2
+        uses: hendrikmuhs/ccache-action@v1.2
         with:
           max-size: 2G
           key: ${{ runner.os }}
@@ -79,40 +69,33 @@ jobs:
 
       - name: Build with Gradle
         run: |
-          # إعطاء صلاحية التنفيذ للملف أولاً
           chmod +x gradlew
-          
-          # إضافة الإعدادات إلى gradle.properties
           echo 'org.gradle.parallel=true' >> gradle.properties
           echo 'org.gradle.vfs.watch=true' >> gradle.properties
           echo 'org.gradle.jvmargs=-Xmx2048m' >> gradle.properties
           echo 'android.native.buildOutput=verbose' >> gradle.properties
           sed -i 's/org.gradle.unsafe.configuration-cache=true//g' gradle.properties
-          
-          # تشغيل البناء
           ./gradlew :module:zipRelease
           ./gradlew :module:zipDebug
-
 
       - name: Prepare artifact
         if: success()
         id: prepareArtifact
         run: |
-          releaseName=$(ls module/build/outputs/release/Zygisk-Next-v*-release.zip | awk -F '(/|.zip)' '{print $5}')
-          debugName=$(ls module/build/outputs/release/Zygisk-Next-v*-debug.zip | awk -F '(/|.zip)' '{print $5}')
+          releasePath=$(ls module/build/outputs/release/Zygisk-Next-v*-release.zip | head -n 1)
+          debugPath=$(ls module/build/outputs/release/Zygisk-Next-v*-debug.zip | head -n 1)
+          
+          releaseName=$(basename "$releasePath" .zip)
+          debugName=$(basename "$debugPath" .zip)
+          
           echo "releaseName=$releaseName" >> $GITHUB_OUTPUT
           echo "debugName=$debugName" >> $GITHUB_OUTPUT
           
-          unzip module/build/outputs/release/Zygisk-Next-v*-release.zip -d zksu-release
-          unzip module/build/outputs/release/Zygisk-Next-v*-debug.zip -d zksu-debug
+          unzip "$releasePath" -d zksu-release
+          unzip "$debugPath" -d zksu-debug
           
-          releaseSymbolName="SYMBOLS-$releaseName.zip"
-          debugSymbolName="SYMBOLS-$debugName.zip"
-          echo "releaseSymbolName=$releaseSymbolName" >> $GITHUB_OUTPUT
-          echo "debugSymbolName=$debugSymbolName" >> $GITHUB_OUTPUT
-          
-          zip -r $releaseSymbolName zygiskd/build/symbols/release
-          zip -r $debugSymbolName zygiskd/build/symbols/debug
+          zip -r "SYMBOLS-$releaseName.zip" zygiskd/build/symbols/release
+          zip -r "SYMBOLS-$debugName.zip" zygiskd/build/symbols/debug
 
       - name: Upload release
         uses: actions/upload-artifact@v4
@@ -127,7 +110,7 @@ jobs:
           path: "./zksu-debug/*"
 
       - name: Upload release symbols
-        uses: actions/upload-artifact@v4 # تم تحديثها من v3 إلى v4 للتوافق
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.prepareArtifact.outputs.releaseName }}-symbols
           path: "zygiskd/build/symbols/release"
