@@ -1,17 +1,9 @@
 name: CI
 
 on:
-  workflow_dispatch:
-    inputs:
-      post_telegram:
-        description: 'Post to Telegram'
-        required: true
-        type: boolean
-  push:
-    branches: [ master ]
-    tags: [ v* ]
-  pull_request:
-  merge_group:
+  [workflow_dispatch,push]
+    
+  
 
 jobs:
   build:
@@ -44,26 +36,21 @@ jobs:
           java-version: "17"
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v4
-        with:
-          gradle-home-cache-cleanup: true
+        uses: gradle/actions/setup-gradle@v3 # الإصدار المستقر لـ Gradle
 
       - name: Setup rust-cache
-        uses: Swatinem/rust-cache@v4
+        uses: swatinem/rust-cache@v2 # تصحيح الإصدار من v4 إلى v2
         with:
           workspaces: zygiskd/src -> ../build/intermediates/rust
           cache-targets: false
-          
+
       - name: Setup Rust
         run: |
           rustup override set nightly
-          rustup target add aarch64-linux-android
-          rustup target add x86_64-linux-android
-          rustup target add i686-linux-android
-          rustup target add armv7-linux-androideabi
+          rustup target add aarch64-linux-android x86_64-linux-android i686-linux-android armv7-linux-androideabi
 
       - name: Set up ccache
-        uses: hendrikmuhs/ccache-action@v4
+        uses: hendrikmuhs/ccache-action@v2 # تصحيح الإصدار من v4 إلى v2
         with:
           max-size: 2G
           key: ${{ runner.os }}
@@ -77,21 +64,25 @@ jobs:
           echo 'org.gradle.jvmargs=-Xmx2048m' >> gradle.properties
           echo 'android.native.buildOutput=verbose' >> gradle.properties
           sed -i 's/org.gradle.unsafe.configuration-cache=true//g' gradle.properties
-          ./gradlew zipRelease
-          ./gradlew zipDebug
+          ./gradlew zipRelease ./gradlew zipDebug
 
       - name: Prepare artifact
         if: success()
         id: prepareArtifact
         run: |
-          releaseName=`ls module/build/outputs/release/Zygisk-Next-v*-release.zip | awk -F '(/|.zip)' '{print $5}'` && echo "releaseName=$releaseName" >> $GITHUB_OUTPUT
-          debugName=`ls module/build/outputs/release/Zygisk-Next-v*-debug.zip | awk -F '(/|.zip)' '{print $5}'` && echo "debugName=$debugName" >> $GITHUB_OUTPUT
+          releaseName=$(ls module/build/outputs/release/Zygisk-Next-v*-release.zip | awk -F '(/|.zip)' '{print $5}')
+          debugName=$(ls module/build/outputs/release/Zygisk-Next-v*-debug.zip | awk -F '(/|.zip)' '{print $5}')
+          echo "releaseName=$releaseName" >> $GITHUB_OUTPUT
+          echo "debugName=$debugName" >> $GITHUB_OUTPUT
+          
           unzip module/build/outputs/release/Zygisk-Next-v*-release.zip -d zksu-release
           unzip module/build/outputs/release/Zygisk-Next-v*-debug.zip -d zksu-debug
+          
           releaseSymbolName="SYMBOLS-$releaseName.zip"
           debugSymbolName="SYMBOLS-$debugName.zip"
           echo "releaseSymbolName=$releaseSymbolName" >> $GITHUB_OUTPUT
           echo "debugSymbolName=$debugSymbolName" >> $GITHUB_OUTPUT
+          
           zip -r $releaseSymbolName zygiskd/build/symbols/release
           zip -r $debugSymbolName zygiskd/build/symbols/debug
 
@@ -108,7 +99,7 @@ jobs:
           path: "./zksu-debug/*"
 
       - name: Upload release symbols
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4 # تم تحديثها من v3 إلى v4 للتوافق
         with:
           name: ${{ steps.prepareArtifact.outputs.releaseName }}-symbols
           path: "zygiskd/build/symbols/release"
@@ -118,4 +109,3 @@ jobs:
         with:
           name: ${{ steps.prepareArtifact.outputs.debugName }}-symbols
           path: "zygiskd/build/symbols/debug"
-        
