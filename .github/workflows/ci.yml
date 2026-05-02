@@ -50,7 +50,7 @@ jobs:
           rustup target add aarch64-linux-android x86_64-linux-android i686-linux-android armv7-linux-androideabi
 
       - name: Set up ccache
-        uses: hendrikmuhs/ccache-action@v2 # تصحيح الإصدار من v4 إلى v2
+        uses: hendrikmuhs/ccache-action@v1.2 # تصحيح الإصدار من v4 إلى v2
         with:
           max-size: 2G
           key: ${{ runner.os }}
