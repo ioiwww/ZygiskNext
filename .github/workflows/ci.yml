@@ -30,18 +30,23 @@ jobs:
             echo '${{ secrets.PUBLIC_KEY }}' | base64 --decode > module/public_key
             echo '${{ secrets.PRIVATE_KEY }}' | base64 --decode > module/private_key
           else
-            echo "Secrets not found. Generating compatible Ed25519 keys for ZygiskNext..."
-            # توليد مفاتيح متوافقة مع متطلبات المشروع (32 bytes)
-            openssl genpkey -algorithm ed25519 -outform DER -out module/private_key
-            openssl pkey -in module/private_key -inform DER -pubout -outform DER -out module/public_key
+            echo "Secrets not found. Generating 32-byte Ed25519 keys for ZygiskNext..."
             
-            # تنظيف المفاتيح لتناسب الصيغة التي يتوقعها Java (Raw bytes)
-            # ملاحظة: ZygiskNext أحياناً يتوقع المفتاح بدون Header الـ DER
-            tail -c 32 module/private_key > module/private_key.raw && mv module/private_key.raw module/private_key
-            tail -c 32 module/public_key > module/public_key.raw && mv module/public_key.raw module/public_key
+            # توليد المفتاح الخاص الخام (32 بت)
+            openssl genpkey -algorithm ed25519 -outform DER -out private.der
+            # استخراج الجزء الخام فقط (آخر 32 بايت من ملف الـ DER)
+            tail -c 32 private.der > module/private_key
             
-            echo "Keys generated successfully."
+            # توليد المفتاح العام الخام (32 بت)😭😭😭gayest app ever
+            openssl pkey -in private.der -inform DER -pubout -outform DER -out public.der
+            # استخراج الجزء الخام فقط (آخر 32 بايت من ملف الـ DER)
+            tail -c 32 public.der > module/public_key
+            
+            echo "Keys generated successfully with length: $(wc -c < module/private_key) bytes"
+            # تنظيف الملفات المؤقتة
+            rm private.der public.der
           fi
+
 
 
       - name: Setup Java
